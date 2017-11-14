@@ -9,13 +9,24 @@ import aeat.AEATType;
 import aeat.AEAType;
 import aeat.AEAtypeType;
 import aeat.AudienceType;
+import aeat.HeaderType;
+import aeat.TypeType;
 import kr.ac.uos.software_project.aeat.MyButtonActionListener;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  *
@@ -76,7 +87,7 @@ public class Frame {
         aeaPanel.loadAeat(aeat);
         headerPanel.loadAeat(aeat);
         aeatextPanel.loadAeat(aeat);
-    }  
+    }
 
     public AEATType getAeat() {
         AEATType aeat = new AEATType();
@@ -85,8 +96,36 @@ public class Frame {
         aea.setIssuer(aeaPanel.getIssuer());
         aea.setAudience(AudienceType.fromValue(aeaPanel.getAudience()));
         aea.setAeaType(AEAtypeType.fromValue(aeaPanel.getAeaType()));
+
+        HeaderType header = new HeaderType();
+        TypeType typeType = new TypeType();
+        typeType.setValue(headerPanel.getEventCode());
+        header.setEventCode(typeType);
+        header.setEffective(stringToXMLGregorianCalendar(headerPanel.getEffective()));
+
+        aea.setHeader(header);
+
         aeat.getAEA().add(aea);
         return aeat;
     }
-     
+
+    private XMLGregorianCalendar stringToXMLGregorianCalendar(String s) {
+        XMLGregorianCalendar result = null;
+
+        
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            Date date = simpleDateFormat.parse(s);
+            GregorianCalendar gregorianCalendar
+                    = (GregorianCalendar) GregorianCalendar.getInstance();
+            gregorianCalendar.setTime(date);
+            result = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregorianCalendar);
+            return result;
+        } catch (ParseException ex) {
+            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DatatypeConfigurationException ex) {
+            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }

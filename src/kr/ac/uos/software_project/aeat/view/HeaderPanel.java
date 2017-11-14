@@ -42,6 +42,7 @@ public class HeaderPanel extends JPanel {
         this.add(createRecord("EventCode"));
         this.add(createRecord("EventDesc"));
         this.add(createRecord("Location"));
+        this.add(createRecord("effective"));
     }
     
     private Box createRecord(String name) {
@@ -62,5 +63,14 @@ public class HeaderPanel extends JPanel {
         nameToTextField.get("EventCode").setText(aeat.getAEA().get(0).getHeader().getEventCode().getValue());
         nameToTextField.get("EventDesc").setText(aeat.getAEA().get(0).getHeader().getEventDesc().get(0).getValue());
         nameToTextField.get("Location").setText(aeat.getAEA().get(0).getHeader().getLocation().get(0).getValue());
+        nameToTextField.get("effective").setText(aeat.getAEA().get(0).getHeader().getEffective().toString());
+    }
+
+    String getEventCode() {
+        return nameToTextField.get("EventCode").getText();
+    }
+
+    String getEffective() {
+        return nameToTextField.get("effective").getText();
     }
 }
