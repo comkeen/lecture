@@ -6,6 +6,9 @@
 package kr.ac.uos.software_project.aeat.view;
 
 import aeat.AEATType;
+import aeat.AEAType;
+import aeat.AEAtypeType;
+import aeat.AudienceType;
 import kr.ac.uos.software_project.aeat.MyButtonActionListener;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -74,5 +77,16 @@ public class Frame {
         headerPanel.loadAeat(aeat);
         aeatextPanel.loadAeat(aeat);
     }  
+
+    public AEATType getAeat() {
+        AEATType aeat = new AEATType();
+        AEAType aea = new AEAType();
+        aea.setAeaId(aeaPanel.getAeaId());
+        aea.setIssuer(aeaPanel.getIssuer());
+        aea.setAudience(AudienceType.fromValue(aeaPanel.getAudience()));
+        aea.setAeaType(AEAtypeType.fromValue(aeaPanel.getAeaType()));
+        aeat.getAEA().add(aea);
+        return aeat;
+    }
      
 }

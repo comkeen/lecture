@@ -75,4 +75,20 @@ public class AeaPanel extends JPanel {
         nameToTextField.get("priority").setText(aeat.getAEA().get(0).getPriority().toString());  
         nameToTextField.get("wakeup").setText(String.valueOf(aeat.getAEA().get(0).isWakeup()));        
     }
+
+    public String getAeaId() {
+        return nameToTextField.get("aeaId").getText();
+    }
+
+    public String getIssuer() {
+        return nameToTextField.get("issuer").getText();
+    }
+
+    public String getAudience() {
+        return nameToTextField.get("audience").getText();
+    }
+
+    public String getAeaType() {
+        return nameToTextField.get("aeaType").getText();
+    }
 }

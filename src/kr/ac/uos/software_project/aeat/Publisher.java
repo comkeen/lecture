@@ -30,41 +30,24 @@ import org.xml.sax.SAXException;
 public class Publisher {
 
     private Frame frame;
-    
+
     public static final String AEAT_EXAM = "xml/AEAT-Example-20170920.xml";
     public static final String AEAT_XML_SCHEMA = "xmlSchema/AEAT-1.0-20170920.xsd";
-    
+
     public Publisher() {
         MyButtonActionListener buttonActionListener = new MyButtonActionListener(this);
-        frame = new Frame(buttonActionListener);    
+        frame = new Frame(buttonActionListener);
     }
-    
+
     private void aeatMarshalling(AEATType aeat, String path) {
         try {
-            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI);
-            URL schemaURL = Publisher.class.getResource(AEAT_XML_SCHEMA);
-            Schema schema = schemaFactory.newSchema(schemaURL);
-            
             JAXBContext jaxbContext = JAXBContext.newInstance(AEATType.class);
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.setEventHandler(new ValidationEventHandler() {
-                @Override
-                public boolean handleEvent(ValidationEvent event) {
-                    System.err.println(String.format("ERROR: %s (%d, %d) Severity: %s", event.getMessage(),
-                    event.getLocator().getLineNumber(),
-                    event.getLocator().getColumnNumber(),
-                    event.getSeverity()));
-                    return false;
-                }
-            });
-            
-            
+            //AEATType 객체를 "path"경로에 xml파일로 저장            
             marshaller.marshal(aeat, new File(path));
         } catch (JAXBException e) {
             e.printStackTrace();
-        } catch (SAXException ex) {
-            Logger.getLogger(Publisher.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -83,13 +66,15 @@ public class Publisher {
     }
 
     public void onClickedLoadButton() {
-        
+
         AEATType aeat = aeatUnmarshalling(AEAT_EXAM);
         frame.loadAeat(aeat);
     }
 
     public void onClickedSaveButton() {
-        //todo
+        AEATType aeat = frame.getAeat();
+        aeatMarshalling(aeat, "xml/output.xml");
+
     }
-    
+
 }
