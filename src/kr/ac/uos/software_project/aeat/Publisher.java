@@ -27,7 +27,7 @@ public class Publisher {
 
     public Publisher() {
         MyButtonActionListener buttonActionListener = new MyButtonActionListener(this);
-        frame = new Frame(buttonActionListener);
+        this.frame = new Frame(buttonActionListener);
     }
 
     private void aeatMarshalling(AEATType aeat, String path) {
@@ -59,15 +59,11 @@ public class Publisher {
     }
 
     public void onClickedLoadButton() {
-
-        AEATType aeat = aeatUnmarshalling(AEAT_EXAM);
-        frame.loadAeat(aeat);
+        frame.loadAeat(this.aeatUnmarshalling(AEAT_EXAM));
     }
 
     public void onClickedSaveButton() {
-        AEATType aeat = frame.getAeat();
-        aeatMarshalling(aeat, "xml/output.xml");
-
+        this.aeatMarshalling(frame.getAeat(), "xml/output.xml");
     }
 
 }
