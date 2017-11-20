@@ -10,16 +10,12 @@ package kr.ac.uos.software_project.aeat;
  * @author comkeen
  */
 public class Main {
-
-    public Main() {
-        new Publisher();
-    }
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new Main();
+        new Publisher();
     }
     
 }

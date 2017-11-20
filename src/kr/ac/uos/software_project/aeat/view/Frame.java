@@ -70,7 +70,6 @@ public class Frame {
     }
 
     private JPanel initButtonPanel() {
-
         JPanel panel = new JPanel();
         JButton loadButton = new JButton("Load");
         loadButton.addActionListener(buttonActionListener);
@@ -89,6 +88,7 @@ public class Frame {
         aeatextPanel.loadAeat(aeat);
     }
 
+    // AEATTYPE 객체 생성 및 엘리먼트 값 set
     public AEATType getAeat() {
         AEATType aeat = new AEATType();
         AEAType aea = new AEAType();
@@ -102,7 +102,6 @@ public class Frame {
         typeType.setValue(headerPanel.getEventCode());
         header.setEventCode(typeType);
         header.setEffective(stringToXMLGregorianCalendar(headerPanel.getEffective()));
-
         aea.setHeader(header);
 
         aeat.getAEA().add(aea);
@@ -111,16 +110,12 @@ public class Frame {
 
     private XMLGregorianCalendar stringToXMLGregorianCalendar(String s) {
         XMLGregorianCalendar result = null;
-
-        
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
             Date date = simpleDateFormat.parse(s);
-            GregorianCalendar gregorianCalendar
-                    = (GregorianCalendar) GregorianCalendar.getInstance();
+            GregorianCalendar gregorianCalendar = (GregorianCalendar) GregorianCalendar.getInstance();
             gregorianCalendar.setTime(date);
             result = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregorianCalendar);
-            return result;
         } catch (ParseException ex) {
             Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DatatypeConfigurationException ex) {
