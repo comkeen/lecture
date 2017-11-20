@@ -48,7 +48,7 @@ import javax.xml.namespace.QName;
     "aea",
     "any"
 })
-@XmlRootElement
+@XmlRootElement(name="AEAT")
 public class AEATType {
 
     @XmlElement(name = "AEA", required = true)

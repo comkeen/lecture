@@ -8,20 +8,11 @@ package kr.ac.uos.software_project.aeat;
 import kr.ac.uos.software_project.aeat.view.Frame;
 import aeat.AEATType;
 import java.io.File;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.ValidationEvent;
-import javax.xml.bind.ValidationEventHandler;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -46,6 +37,7 @@ public class Publisher {
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             //AEATType 객체를 "path"경로에 xml파일로 저장            
             marshaller.marshal(aeat, new File(path));
+            System.out.println("Save xml to: " + path);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -59,6 +51,7 @@ public class Publisher {
             JAXBContext jaxbContext = JAXBContext.newInstance(AEATType.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             aeat = (AEATType) ((JAXBElement) jaxbUnmarshaller.unmarshal(file)).getValue();
+            System.out.println("Load xml from: " + path);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
