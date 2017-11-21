@@ -31,6 +31,10 @@ public class Publisher {
         this.frame = new Frame(buttonActionListener); // 메인 프레임 생성
     }
 
+    //메소드명:aeatMarshalling()
+    //입력:aeat 루트엘리먼트 객체(AEATType), 마샬링할 파일 경로 및 이름(String)
+    //출력:없음
+    //부수효과:없음
     private void aeatMarshalling(AEATType aeat, String path) {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(AEATType.class);
@@ -43,6 +47,10 @@ public class Publisher {
         }
     }
 
+    //메소드명: aeatUnmarshalling()
+    //입력:불러올 파일 경로 및 이름(String)
+    //출력:언마샬링한 xml 파일 루트엘리먼트 객체
+    //부수효과:없음
     private AEATType aeatUnmarshalling(String path) {
         AEATType aeat = null;
         try {

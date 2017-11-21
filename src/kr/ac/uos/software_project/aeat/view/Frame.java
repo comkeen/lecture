@@ -82,13 +82,20 @@ public class Frame {
         return panel;
     }
 
+    //메소드명:loadAeat()
+    //입력:하위 패널들의 텍스트필드에 표출할 데이터인 aeat 객체
+    //출력:없음
+    //부수효과:하위 패널의 loadAeat() 메소드 호출
     public void loadAeat(AEATType aeat) {
         aeaPanel.loadAeat(aeat);
         headerPanel.loadAeat(aeat);
         aeatextPanel.loadAeat(aeat);
     }
 
-    // AEATTYPE 객체 생성 및 엘리먼트 값 set
+    //메소드명:getAeat()
+    //입력:없음
+    //출력:하위 패널들의 텍스트필드로부터 AEAT 요소 값들을 읽어와서 AEAT 객체 생성
+    //부수효과:없음
     public AEATType getAeat() {
         AEATType aeat = new AEATType();
         AEAType aea = new AEAType();
@@ -107,7 +114,11 @@ public class Frame {
         aeat.getAEA().add(aea);
         return aeat;
     }
-
+    
+    //메소드명:stringToXMLGregorianCalendar()
+    //입력:XMLGregorianCalendar 타입으로 변환할 문자열(String)
+    //출력:XMLGregorianCalendar 객체
+    //부수효과:없음
     private XMLGregorianCalendar stringToXMLGregorianCalendar(String s) {
         XMLGregorianCalendar result = null;
         try {
