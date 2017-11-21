@@ -9,8 +9,7 @@ import aeat.AEATType;
 import kr.ac.uos.software_project.aeat.MyButtonActionListener;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Insets;
+import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.BorderFactory;
@@ -19,6 +18,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -31,10 +31,8 @@ public class AeaPanel extends JPanel {
     
     public AeaPanel(MyButtonActionListener buttonActionListener) {
         super();
-        super.setMinimumSize(new Dimension(400, 200));
         super.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         super.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-
         this.buttonActionListener = buttonActionListener;
         nameToTextField = new HashMap<>();
         initComponents();
@@ -52,6 +50,7 @@ public class AeaPanel extends JPanel {
     
     private Box createRecord(String name) {
         Box box = Box.createHorizontalBox();
+        box.setBorder(new EmptyBorder(5,10,5,10));
         JLabel label = new JLabel(name, JLabel.CENTER);
         label.setFont(Frame.LABEL_FONT);
         label.setPreferredSize(Frame.LABEL_DIMENSION);

@@ -16,6 +16,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import kr.ac.uos.software_project.aeat.MyButtonActionListener;
 
 /**
@@ -29,7 +30,6 @@ public class HeaderPanel extends JPanel {
     
     public HeaderPanel(MyButtonActionListener buttonActionListener) {
         super();        
-        super.setPreferredSize(new Dimension(400, 200));
         super.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         super.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         
@@ -47,6 +47,7 @@ public class HeaderPanel extends JPanel {
     
     private Box createRecord(String name) {
         Box box = Box.createHorizontalBox();
+        box.setBorder(new EmptyBorder(5,10,5,10));
         JLabel label = new JLabel(name, JLabel.CENTER);
         label.setFont(Frame.LABEL_FONT);
         label.setPreferredSize(Frame.LABEL_DIMENSION);

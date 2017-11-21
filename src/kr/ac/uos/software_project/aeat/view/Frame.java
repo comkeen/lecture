@@ -24,6 +24,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -47,6 +49,17 @@ public class Frame {
     public static final Font LABEL_FONT = new Font(Font.DIALOG, Font.PLAIN, 14);
 
     public Frame(MyButtonActionListener buttonActionListener) {
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.buttonActionListener = buttonActionListener;
 
         this.frame = new JFrame(TITLE);
@@ -64,9 +77,11 @@ public class Frame {
         buttonPanel = initButtonPanel();
         frame.getContentPane().add(buttonPanel);
 
+        frame.setPreferredSize(new Dimension(400, 600));
         frame.setSize(new Dimension(400, 600));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        frame.pack();
     }
 
     private JPanel initButtonPanel() {
@@ -114,7 +129,7 @@ public class Frame {
         aeat.getAEA().add(aea);
         return aeat;
     }
-    
+
     //메소드명:stringToXMLGregorianCalendar()
     //입력:XMLGregorianCalendar 타입으로 변환할 문자열(String)
     //출력:XMLGregorianCalendar 객체
