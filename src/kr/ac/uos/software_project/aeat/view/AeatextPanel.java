@@ -7,7 +7,6 @@ package kr.ac.uos.software_project.aeat.view;
 
 import aeat.AEATType;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.BorderFactory;
@@ -25,13 +24,13 @@ import kr.ac.uos.software_project.aeat.MyButtonActionListener;
  */
 public class AeatextPanel extends JPanel {
 
-    private MyButtonActionListener buttonActionListener;
-    private Map<String, JTextField> nameToTextField;
+    private final MyButtonActionListener buttonActionListener;
+    private final Map<String, JTextField> nameToTextField;
 
     public AeatextPanel(MyButtonActionListener buttonActionListener) {
         super();        
         super.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        super.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        super.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
         
         this.buttonActionListener = buttonActionListener;
         nameToTextField = new HashMap<>();

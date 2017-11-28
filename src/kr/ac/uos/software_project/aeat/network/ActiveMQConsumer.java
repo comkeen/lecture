@@ -45,7 +45,7 @@ public class ActiveMQConsumer implements ExceptionListener {
             connection.start();
 
             connection.setExceptionListener(this);
-        } catch (Exception e) {
+        } catch (JMSException e) {
             System.out.println("Caught: " + e);
             e.printStackTrace();
         }
@@ -68,7 +68,7 @@ public class ActiveMQConsumer implements ExceptionListener {
                     if (message instanceof TextMessage) {
                         TextMessage textMessage = (TextMessage) message;
                         try {
-                            System.out.println("Received Message:" + textMessage.getText());
+                            System.out.println("Received Message:\n" + textMessage.getText());
                         } catch (JMSException e) {
                             e.printStackTrace();
                         }

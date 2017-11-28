@@ -11,6 +11,7 @@ import aeat.AEAtypeType;
 import aeat.AudienceType;
 import aeat.HeaderType;
 import aeat.TypeType;
+import java.awt.Component;
 import kr.ac.uos.software_project.aeat.MyButtonActionListener;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -24,11 +25,14 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import kr.ac.uos.software_project.aeat.Publisher;
 
 /**
  *
@@ -36,7 +40,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 public class Frame {
 
-    private JFrame frame;
     private AeaPanel aeaPanel;
     private HeaderPanel headerPanel;
     private AeatextPanel aeatextPanel;
@@ -47,41 +50,43 @@ public class Frame {
     public static final String TITLE = "AEAT Publisher";
     public static final Dimension LABEL_DIMENSION = new Dimension(80, 40);
     public static final Font LABEL_FONT = new Font(Font.DIALOG, Font.PLAIN, 14);
+    private MessagePanel messagePanel;
 
     public Frame(MyButtonActionListener buttonActionListener) {
         try {
-            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(new NimbusLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
         }
+        JFrame frame = new JFrame(TITLE);
         this.buttonActionListener = buttonActionListener;
-
-        this.frame = new JFrame(TITLE);
-        frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-
-        aeaPanel = new AeaPanel(buttonActionListener);
-        frame.getContentPane().add(aeaPanel);
-
-        headerPanel = new HeaderPanel(buttonActionListener);
-        frame.getContentPane().add(headerPanel);
-
-        aeatextPanel = new AeatextPanel(buttonActionListener);
-        frame.getContentPane().add(aeatextPanel);
-
-        buttonPanel = initButtonPanel();
-        frame.getContentPane().add(buttonPanel);
-
+        JTabbedPane mainTabbedPanel = new JTabbedPane() ;
+               
+        mainTabbedPanel.add("AEAT 편집", initAeatEditTabPanel());
+        mainTabbedPanel.add("메시지", initMessageTabPanel());
+        frame.getContentPane().add(mainTabbedPanel);
+        
         frame.setPreferredSize(new Dimension(400, 600));
         frame.setSize(new Dimension(400, 600));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.pack();
+    }
+    
+    private JPanel initAeatEditTabPanel() {
+        JPanel aeatEditTabPanel = new JPanel();
+        aeatEditTabPanel.setLayout(new BoxLayout(aeatEditTabPanel, BoxLayout.Y_AXIS));
+        
+        this.aeaPanel = new AeaPanel(buttonActionListener);
+        aeatEditTabPanel.add(aeaPanel);        
+        this.headerPanel = new HeaderPanel(buttonActionListener);
+        aeatEditTabPanel.add(headerPanel);
+        this.aeatextPanel = new AeatextPanel(buttonActionListener);
+        aeatEditTabPanel.add(aeatextPanel);
+        this.buttonPanel = initButtonPanel();
+        aeatEditTabPanel.add(buttonPanel);
+        
+        return aeatEditTabPanel;
     }
 
     private JPanel initButtonPanel() {
@@ -96,6 +101,11 @@ public class Frame {
 
         return panel;
     }
+    
+    private JPanel initMessageTabPanel() {
+        this.messagePanel = new MessagePanel(buttonActionListener);        
+        return messagePanel;
+    }
 
     //메소드명:loadAeat()
     //입력:하위 패널들의 텍스트필드에 표출할 데이터인 aeat 객체
@@ -105,6 +115,8 @@ public class Frame {
         aeaPanel.loadAeat(aeat);
         headerPanel.loadAeat(aeat);
         aeatextPanel.loadAeat(aeat);
+        
+        messagePanel.loadAeat(Publisher.aeatToXml(aeat));
     }
 
     //메소드명:getAeat()
@@ -134,19 +146,22 @@ public class Frame {
     //입력:XMLGregorianCalendar 타입으로 변환할 문자열(String)
     //출력:XMLGregorianCalendar 객체
     //부수효과:없음
-    private XMLGregorianCalendar stringToXMLGregorianCalendar(String s) {
+    private XMLGregorianCalendar stringToXMLGregorianCalendar(String input) {
         XMLGregorianCalendar result = null;
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-            Date date = simpleDateFormat.parse(s);
+            Date date = simpleDateFormat.parse(input);
             GregorianCalendar gregorianCalendar = (GregorianCalendar) GregorianCalendar.getInstance();
             gregorianCalendar.setTime(date);
             result = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregorianCalendar);
-        } catch (ParseException ex) {
-            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DatatypeConfigurationException ex) {
+        } catch (ParseException | DatatypeConfigurationException ex) {
             Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
+
+    public void clearMessagePanel() {
+        messagePanel.clearTextArea();
+    }
+
 }

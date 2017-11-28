@@ -15,11 +15,11 @@ import java.awt.event.ActionListener;
 public class MyButtonActionListener implements ActionListener {
 
     private Publisher publisher;
-    
+
     public MyButtonActionListener(Publisher publisher) {
         this.publisher = publisher;
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
@@ -29,6 +29,9 @@ public class MyButtonActionListener implements ActionListener {
                 break;
             case "Save":
                 publisher.onClickedSaveButton();
+                break;
+            case "Clear":
+                publisher.onClickedClearButton();
                 break;
             default:
                 break;

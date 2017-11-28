@@ -9,9 +9,9 @@ import org.junit.Test;
 public class JMS_Test {
 
     @Test
-    public void testPublisher() {
-        String DESTIANTION_EXAM = "TEST.FOO";
-        String MQ_ADDRESS = "vm://localhost";
+    public void testSendReceiveMessage() {
+        String DESTIANTION_EXAM = "TEST.FOO"; // 데스티네이션 이름
+        String MQ_ADDRESS = "vm://localhost"; // 메시지 브로커 주소
 
         try {
             ActiveMQProducer producer = new ActiveMQProducer(MQ_ADDRESS);

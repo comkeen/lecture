@@ -30,12 +30,12 @@ public class ActiveMQProducer {
 
     private void init(String address) {
         try {
-            // Create a ConnectionFactory
+            // Create an ActiveMQConnectionFactory to use JMS
             ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(address);
             
             // Create a Connection
             this.connection = connectionFactory.createConnection();
-            connection.start();            
+            connection.start();    
         } catch (JMSException ex) {
             Logger.getLogger(ActiveMQProducer.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -53,7 +53,7 @@ public class ActiveMQProducer {
             MessageProducer producer = session.createProducer(destination);
             producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
             
-            // Create a messages            
+            // Create a messages
             TextMessage message = session.createTextMessage(text);
             
             // Tell the producer to send the message

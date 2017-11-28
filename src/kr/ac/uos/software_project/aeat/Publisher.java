@@ -8,6 +8,7 @@ package kr.ac.uos.software_project.aeat;
 import kr.ac.uos.software_project.aeat.view.Frame;
 import aeat.AEATType;
 import java.io.File;
+import java.io.StringWriter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -65,6 +66,22 @@ public class Publisher {
         return aeat;
     }
 
+    public static String aeatToXml(AEATType aeat) {
+        String result = "";
+        try {
+            JAXBContext jaxbContext = JAXBContext.newInstance(AEATType.class);
+            Marshaller marshaller = jaxbContext.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            //AEATType 객체를 "path" 경로에 파일로 저장
+            StringWriter stringWriter = new StringWriter();
+            marshaller.marshal(aeat, stringWriter);
+            result = stringWriter.toString();
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public void onClickedLoadButton() {
         String path = AEAT_SAMPLE;
         frame.loadAeat(this.aeatUnmarshalling(path));
@@ -75,6 +92,10 @@ public class Publisher {
         String path = AEAT_OUTPUT;
         this.aeatMarshalling(frame.getAeat(), path);
         System.out.println("Save xml to: " + path);
+    }
+
+    public void onClickedClearButton() {
+        frame.clearMessagePanel();
     }
 
 }
