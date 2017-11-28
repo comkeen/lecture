@@ -30,8 +30,8 @@ public class MyButtonActionListener implements ActionListener {
             case "Save":
                 publisher.onClickedSaveButton();
                 break;
-            case "Clear":
-                publisher.onClickedClearButton();
+            case "Send":
+                publisher.onClickedSendButton();
                 break;
             default:
                 break;

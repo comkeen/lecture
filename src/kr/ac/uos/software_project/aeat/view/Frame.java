@@ -164,4 +164,12 @@ public class Frame {
         messagePanel.clearTextArea();
     }
 
+    public void onMessage(String text) {
+        messagePanel.onMessage(text);
+    }
+
+    public String getMessage() {
+        return messagePanel.getMessage();
+    }
+
 }

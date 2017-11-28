@@ -16,6 +16,7 @@ import javax.jms.MessageConsumer;
 import javax.jms.MessageListener;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+import kr.ac.uos.software_project.aeat.Publisher;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 /**
@@ -25,6 +26,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 public class ActiveMQConsumer implements ExceptionListener {
 
     private Connection connection;
+    private Publisher publisher;
 
     public ActiveMQConsumer(String address) {
         init(address);
@@ -69,6 +71,7 @@ public class ActiveMQConsumer implements ExceptionListener {
                         TextMessage textMessage = (TextMessage) message;
                         try {
                             System.out.println("Received Message:\n" + textMessage.getText());
+                            publisher.onMessage(textMessage.getText());
                         } catch (JMSException e) {
                             e.printStackTrace();
                         }
@@ -88,6 +91,10 @@ public class ActiveMQConsumer implements ExceptionListener {
         } catch (JMSException ex) {
             Logger.getLogger(ActiveMQProducer.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 }
 
