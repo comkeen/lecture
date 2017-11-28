@@ -24,6 +24,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -47,6 +49,17 @@ public class Frame {
     public static final Font LABEL_FONT = new Font(Font.DIALOG, Font.PLAIN, 14);
 
     public Frame(MyButtonActionListener buttonActionListener) {
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.buttonActionListener = buttonActionListener;
 
         this.frame = new JFrame(TITLE);
@@ -64,9 +77,11 @@ public class Frame {
         buttonPanel = initButtonPanel();
         frame.getContentPane().add(buttonPanel);
 
+        frame.setPreferredSize(new Dimension(400, 600));
         frame.setSize(new Dimension(400, 600));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        frame.pack();
     }
 
     private JPanel initButtonPanel() {
@@ -82,13 +97,20 @@ public class Frame {
         return panel;
     }
 
+    //메소드명:loadAeat()
+    //입력:하위 패널들의 텍스트필드에 표출할 데이터인 aeat 객체
+    //출력:없음
+    //부수효과:하위 패널의 loadAeat() 메소드 호출
     public void loadAeat(AEATType aeat) {
         aeaPanel.loadAeat(aeat);
         headerPanel.loadAeat(aeat);
         aeatextPanel.loadAeat(aeat);
     }
 
-    // AEATTYPE 객체 생성 및 엘리먼트 값 set
+    //메소드명:getAeat()
+    //입력:없음
+    //출력:하위 패널들의 텍스트필드로부터 AEAT 요소 값들을 읽어와서 AEAT 객체 생성
+    //부수효과:없음
     public AEATType getAeat() {
         AEATType aeat = new AEATType();
         AEAType aea = new AEAType();
@@ -108,6 +130,10 @@ public class Frame {
         return aeat;
     }
 
+    //메소드명:stringToXMLGregorianCalendar()
+    //입력:XMLGregorianCalendar 타입으로 변환할 문자열(String)
+    //출력:XMLGregorianCalendar 객체
+    //부수효과:없음
     private XMLGregorianCalendar stringToXMLGregorianCalendar(String s) {
         XMLGregorianCalendar result = null;
         try {
