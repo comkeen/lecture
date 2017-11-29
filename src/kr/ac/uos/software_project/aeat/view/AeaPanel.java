@@ -7,7 +7,7 @@ package kr.ac.uos.software_project.aeat.view;
 
 import aeat.AEATType;
 import aeat.AudienceType;
-import kr.ac.uos.software_project.aeat.MyButtonActionListener;
+import kr.ac.uos.software_project.aeat.PublisherActionListener;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,10 +32,10 @@ import javax.swing.border.EmptyBorder;
  */
 public class AeaPanel extends JPanel {
 
-    private MyButtonActionListener buttonActionListener;
+    private PublisherActionListener buttonActionListener;
     private Map<String, JComponent> nameToTextField;
 
-    public AeaPanel(MyButtonActionListener buttonActionListener) {
+    public AeaPanel(PublisherActionListener buttonActionListener) {
         super();
         super.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         super.setBorder(BorderFactory.createLineBorder(Color.BLUE));

@@ -65,14 +65,7 @@ public class ActiveMQConsumer implements ExceptionListener {
             // Wait for a message
             MessageListener listener = new MessageListener() {
                 public void onMessage(Message message) {
-                    if (message instanceof TextMessage) {
-                        TextMessage textMessage = (TextMessage) message;
-                        try {
-                            System.out.println("Received Message:\n" + textMessage.getText());
-                        } catch (JMSException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                    
                 }
             };
             // Register to MessageListener

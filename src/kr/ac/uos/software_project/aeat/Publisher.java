@@ -28,7 +28,7 @@ public class Publisher {
     public static final String AEAT_OUTPUT = "xml/output.xml"; // 저장되는 파일 경로
 
     public Publisher() {
-        MyButtonActionListener buttonActionListener = new MyButtonActionListener(this); // 버튼액션리스너 생성
+        PublisherActionListener buttonActionListener = new PublisherActionListener(this); // 버튼액션리스너 생성
         this.frame = new Frame(buttonActionListener); // 메인 프레임 생성
     }
 

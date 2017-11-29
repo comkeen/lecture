@@ -10,7 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import kr.ac.uos.software_project.aeat.MyButtonActionListener;
+import kr.ac.uos.software_project.aeat.PublisherActionListener;
 
 /**
  *
@@ -18,10 +18,10 @@ import kr.ac.uos.software_project.aeat.MyButtonActionListener;
  */
 public class MessagePanel extends JPanel{
 
-    private final MyButtonActionListener buttonActionListener;
+    private final PublisherActionListener buttonActionListener;
     private JTextArea textArea;
     
-    public MessagePanel(MyButtonActionListener buttonActionListener) {
+    public MessagePanel(PublisherActionListener buttonActionListener) {
         super();
         super.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         super.setBorder(BorderFactory.createLineBorder(Color.BLUE));

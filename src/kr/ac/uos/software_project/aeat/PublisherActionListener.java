@@ -7,16 +7,20 @@ package kr.ac.uos.software_project.aeat;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.TextMessage;
 
 /**
  *
  * @author comkeen
  */
-public class MyButtonActionListener implements ActionListener {
+public class PublisherActionListener implements ActionListener, MessageListener {
 
     private Publisher publisher;
 
-    public MyButtonActionListener(Publisher publisher) {
+    public PublisherActionListener(Publisher publisher) {
         this.publisher = publisher;
     }
 
@@ -35,6 +39,18 @@ public class MyButtonActionListener implements ActionListener {
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    public void onMessage(Message message) {
+        if (message instanceof TextMessage) {
+            TextMessage textMessage = (TextMessage) message;
+            try {
+                System.out.println("Received Message:\n" + textMessage.getText());
+            } catch (JMSException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

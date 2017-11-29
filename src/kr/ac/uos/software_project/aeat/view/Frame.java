@@ -12,7 +12,7 @@ import aeat.AudienceType;
 import aeat.HeaderType;
 import aeat.TypeType;
 import java.awt.Component;
-import kr.ac.uos.software_project.aeat.MyButtonActionListener;
+import kr.ac.uos.software_project.aeat.PublisherActionListener;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.text.ParseException;
@@ -45,14 +45,14 @@ public class Frame {
     private AeatextPanel aeatextPanel;
     private JPanel buttonPanel;
 
-    private MyButtonActionListener buttonActionListener;
+    private PublisherActionListener buttonActionListener;
 
     public static final String TITLE = "AEAT Publisher";
     public static final Dimension LABEL_DIMENSION = new Dimension(80, 40);
     public static final Font LABEL_FONT = new Font(Font.DIALOG, Font.PLAIN, 14);
     private MessagePanel messagePanel;
 
-    public Frame(MyButtonActionListener buttonActionListener) {
+    public Frame(PublisherActionListener buttonActionListener) {
         try {
             UIManager.setLookAndFeel(new NimbusLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {

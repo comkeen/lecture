@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import kr.ac.uos.software_project.aeat.MyButtonActionListener;
+import kr.ac.uos.software_project.aeat.PublisherActionListener;
 
 /**
  *
@@ -25,10 +25,10 @@ import kr.ac.uos.software_project.aeat.MyButtonActionListener;
  */
 public class HeaderPanel extends JPanel {
     
-    private MyButtonActionListener buttonActionListener;
+    private PublisherActionListener buttonActionListener;
     private Map<String, JTextField> nameToTextField;
     
-    public HeaderPanel(MyButtonActionListener buttonActionListener) {
+    public HeaderPanel(PublisherActionListener buttonActionListener) {
         super();        
         super.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         super.setBorder(BorderFactory.createLineBorder(Color.GRAY));

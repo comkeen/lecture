@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import kr.ac.uos.software_project.aeat.MyButtonActionListener;
+import kr.ac.uos.software_project.aeat.PublisherActionListener;
 
 /**
  *
@@ -24,10 +24,10 @@ import kr.ac.uos.software_project.aeat.MyButtonActionListener;
  */
 public class AeatextPanel extends JPanel {
 
-    private final MyButtonActionListener buttonActionListener;
+    private final PublisherActionListener buttonActionListener;
     private final Map<String, JTextField> nameToTextField;
 
-    public AeatextPanel(MyButtonActionListener buttonActionListener) {
+    public AeatextPanel(PublisherActionListener buttonActionListener) {
         super();        
         super.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         super.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
