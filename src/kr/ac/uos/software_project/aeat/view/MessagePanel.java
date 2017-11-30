@@ -8,6 +8,7 @@ package kr.ac.uos.software_project.aeat.view;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import kr.ac.uos.software_project.aeat.PublisherActionListener;
@@ -20,6 +21,7 @@ public class MessagePanel extends JPanel{
 
     private final PublisherActionListener buttonActionListener;
     private JTextArea textArea;
+    private JButton sendButton;
     
     public MessagePanel(PublisherActionListener buttonActionListener) {
         super();
@@ -30,7 +32,9 @@ public class MessagePanel extends JPanel{
     }
 
     private void initComponents() {
-        this.textArea = new JTextArea();        
+        this.textArea = new JTextArea();  
+        initButtonPanel();
+        
         this.add(textArea);
     }
 
@@ -40,5 +44,18 @@ public class MessagePanel extends JPanel{
 
     public void clearTextArea() {
         textArea.setText("");
+    }
+
+    void onMessage(String text) {
+        textArea.setText(text);
+    }
+
+    private void initButtonPanel() {
+        this.sendButton = new JButton("Send");
+        sendButton.addActionListener(buttonActionListener);
+    }
+
+    public String getMessage() {
+        return textArea.getText();
     }
 }

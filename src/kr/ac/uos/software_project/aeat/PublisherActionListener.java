@@ -34,9 +34,6 @@ public class PublisherActionListener implements ActionListener, MessageListener 
             case "Save":
                 publisher.onClickedSaveButton();
                 break;
-            case "Clear":
-                publisher.onClickedClearButton();
-                break;
             default:
                 break;
         }
@@ -48,6 +45,7 @@ public class PublisherActionListener implements ActionListener, MessageListener 
             TextMessage textMessage = (TextMessage) message;
             try {
                 System.out.println("Received Message:\n" + textMessage.getText());
+                publisher.onMessage(textMessage.getText());
             } catch (JMSException e) {
                 e.printStackTrace();
             }

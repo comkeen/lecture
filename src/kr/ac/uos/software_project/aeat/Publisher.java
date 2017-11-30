@@ -14,6 +14,8 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import kr.ac.uos.software_project.aeat.network.ActiveMQConsumer;
+import kr.ac.uos.software_project.aeat.network.ActiveMQProducer;
 
 /**
  *
@@ -22,14 +24,22 @@ import javax.xml.bind.Unmarshaller;
 public class Publisher {
 
     private Frame frame;
+    private ActiveMQProducer producer;
 
     public static final String AEAT_SAMPLE = "xml/AEAT-Example-20170920.xml"; // 샘플 aeat xml 경로
     public static final String AEAT_XML_SCHEMA = "xmlSchema/AEAT-1.0-20170920.xsd"; // aeat schema 경로
     public static final String AEAT_OUTPUT = "xml/output.xml"; // 저장되는 파일 경로
-
+    public static final String MQ_ADDRESS = "tcp://172.16.162.203:61616"; // 메시지 브로커 주소    
+    private String myDestination = "lecture.goal"; // 메시지 목적지 이름
+    
     public Publisher() {
-        PublisherActionListener buttonActionListener = new PublisherActionListener(this); // 버튼액션리스너 생성
-        this.frame = new Frame(buttonActionListener); // 메인 프레임 생성
+        PublisherActionListener actionListener = new PublisherActionListener(this); // 버튼액션리스너 생성
+        this.frame = new Frame(actionListener); // 메인 프레임 생성
+        
+        ActiveMQConsumer consumer = new ActiveMQConsumer(MQ_ADDRESS);
+        consumer.setConsumerDestinationAndListener(myDestination, actionListener);
+        this.producer = new ActiveMQProducer(MQ_ADDRESS);
+        
     }
 
     //메소드명:aeatMarshalling()
@@ -98,4 +108,7 @@ public class Publisher {
         frame.clearMessagePanel();
     }
 
+    public void onMessage(String text) {
+        frame.onMessage(text);
+    }
 }
