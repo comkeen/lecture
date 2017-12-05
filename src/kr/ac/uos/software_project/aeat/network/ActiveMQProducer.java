@@ -57,7 +57,7 @@ public class ActiveMQProducer {
             TextMessage message = session.createTextMessage(text);
             
             // Tell the producer to send the message
-            System.out.println("Sent message: "+ text);
+            System.out.println("Sent message:\n"+ text);
             producer.send(message);
         } catch (JMSException ex) {
             Logger.getLogger(ActiveMQProducer.class.getName()).log(Level.SEVERE, null, ex);
