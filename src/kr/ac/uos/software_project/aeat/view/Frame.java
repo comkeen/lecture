@@ -5,13 +5,6 @@
  */
 package kr.ac.uos.software_project.aeat.view;
 
-import aeat.AEATType;
-import aeat.AEAType;
-import aeat.AEAtypeType;
-import aeat.AudienceType;
-import aeat.HeaderType;
-import aeat.TypeType;
-import kr.ac.uos.software_project.aeat.PublisherActionListener;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.text.ParseException;
@@ -20,6 +13,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,7 +25,15 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+
+import kr.ac.uos.aeat.AEATType;
+import kr.ac.uos.aeat.AEAType;
+import kr.ac.uos.aeat.AEAtypeType;
+import kr.ac.uos.aeat.AudienceType;
+import kr.ac.uos.aeat.HeaderType;
+import kr.ac.uos.aeat.TypeType;
 import kr.ac.uos.software_project.aeat.Publisher;
+import kr.ac.uos.software_project.aeat.PublisherActionListener;
 
 /**
  *

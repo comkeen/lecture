@@ -5,15 +5,12 @@
  */
 package kr.ac.uos.software_project.aeat.view;
 
-import aeat.AEATType;
-import aeat.AudienceType;
-import kr.ac.uos.software_project.aeat.PublisherActionListener;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -25,6 +22,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import kr.ac.uos.aeat.AEATType;
+import kr.ac.uos.aeat.AudienceType;
+import kr.ac.uos.software_project.aeat.PublisherActionListener;
 
 /**
  *

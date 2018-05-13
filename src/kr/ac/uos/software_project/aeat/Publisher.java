@@ -5,17 +5,19 @@
  */
 package kr.ac.uos.software_project.aeat;
 
-import kr.ac.uos.software_project.aeat.view.Frame;
-import aeat.AEATType;
 import java.io.File;
 import java.io.StringWriter;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+
+import kr.ac.uos.aeat.AEATType;
 import kr.ac.uos.software_project.aeat.network.ActiveMQConsumer;
 import kr.ac.uos.software_project.aeat.network.ActiveMQProducer;
+import kr.ac.uos.software_project.aeat.view.Frame;
 
 /**
  *
@@ -29,7 +31,7 @@ public class Publisher {
     public static final String AEAT_SAMPLE = "xml/AEAT-Example-20170920.xml"; // 샘플 aeat xml 경로
     public static final String AEAT_XML_SCHEMA = "xmlSchema/AEAT-1.0-20170920.xsd"; // aeat schema 경로
     public static final String AEAT_OUTPUT = "xml/output.xml"; // 저장되는 파일 경로
-    public static final String MQ_ADDRESS = "tcp://172.16.162.203:61616"; // 메시지 브로커 주소    
+    public static final String MQ_ADDRESS = "tcp://172.16.164.106:61616"; // 메시지 브로커 주소    
     public static final String DEFAULT_DESTINATION = "lecture.goal"; // 메시지 목적지 이름
     private final ActiveMQConsumer consumer;
     

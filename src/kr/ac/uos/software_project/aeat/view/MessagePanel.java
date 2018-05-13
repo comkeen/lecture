@@ -6,7 +6,7 @@
 package kr.ac.uos.software_project.aeat.view;
 
 import java.awt.Color;
-import java.awt.Dimension;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
 import kr.ac.uos.software_project.aeat.Publisher;
 import kr.ac.uos.software_project.aeat.PublisherActionListener;
 
@@ -94,7 +95,7 @@ public class MessagePanel extends JPanel{
     }
 
     public void loadAeat(String aeatXML) {
-        textArea.setText(aeatXML);
+//        textArea.setText(aeatXML); //!!
     }
 
     public void clearTextArea() {
